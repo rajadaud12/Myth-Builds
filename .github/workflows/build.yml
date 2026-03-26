@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           if [ ! -f pubspec.yaml ]; then
-            echo "name: app\ndescription: Base\nversion: 1.0.0\nenvironment:\n  sdk: '>=3.0.0 <4.0.0'\ndependencies:\n  flutter:\n    sdk: flutter" > pubspec.yaml
+           "echo \"name: app\ndescription: Base\nversion: 1.0.0\nenvironment:\n  sdk: '>=3.0.0 <4.0.0'\ndependencies:\n  flutter:\n    sdk: flutter\" > pubspec.yaml
           fi
           flutter pub get
       - name: Build
@@ -38,7 +38,7 @@ jobs:
           name: build-output
           path: |
             build/web
-            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/flutter-apk/app-release.apk 
       - name: Deploy to GitHub Pages
         if: github.event.inputs.build_type == 'web'
         uses: peaceiris/actions-gh-pages@v3
