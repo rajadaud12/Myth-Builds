@@ -15,21 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action @v2
         with:
           flutter-version: "3.24.0"
           channel: "stable"
       - name: Install dependencies
         run: |
           if [ ! -f pubspec.yaml ]; then
-            echo "name: app
-description: A new Flutter project.
-version: 1.0.0+1
-environment:
-  sdk: '>=3.0.0 <4.0.0'
-dependencies:
-  flutter:
-    sdk: flutter" > pubspec.yaml
+            echo "name: app\ndescription: Base\nversion: 1.0.0\nenvironment:\n  sdk: '>=3.0.0 <4.0.0'\ndependencies:\n  flutter:\n    sdk: flutter" > pubspec.yaml
           fi
           flutter pub get
       - name: Build
@@ -47,7 +40,7 @@ dependencies:
             build/web
             build/app/outputs/flutter-apk/app-release.apk
       - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' || github.event.inputs.build_type == 'web'
+        if: github.event.inputs.build_type == 'web'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
